@@ -4,18 +4,17 @@
   # Web Site: https://www.rockdevper.com
 */
 
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-import { AppConfig } from './constants/Constants';
-import { getAllArtifacts } from './util/Githubs';
+import { cleanupArtifacts } from './util/Githubs';
 
 const runTask = async () => {
   try {
-    const projects = ['X-c0d3/EasyOrderMan'];
+    const projects = ['SolarPower', 'EasyOrderMan'];
 
-    var artifacts = await getAllArtifacts(projects);
-    console.log(artifacts);
+    for await (const proj of projects) {
+      await cleanupArtifacts(proj);
+    }
+
+    console.log('****** The artifacts sucessfully ******');
   } catch (error: any) {
     console.log('Error:' + error.message);
   }
